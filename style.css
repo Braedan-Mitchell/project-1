@@ -1,0 +1,59 @@
+
+body{
+    background-color: rgb(44, 43, 43);
+    color: #FFA500;
+
+}
+
+
+.vr {
+  border-left: 2px solid rgb(44, 43, 43);
+  height: 3%;
+
+}
+
+/* Letter float animation: responsive, wraps letters to fit viewport */
+.float-letters{
+    margin: 5px;
+    padding: 10px;
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
+    line-height:1;
+    gap: 0;
+    font-size: clamp(12px, 8.9vw, 48px); /* scales but keeps letters small on narrow viewports */
+    white-space: normal;
+    max-width:100%;
+    box-sizing:border-box;
+    word-break:break-word;
+    -webkit-font-smoothing:antialiased;
+}
+
+.float-letters > *{
+    display:inline-block;
+    flex:0 0 auto;
+    will-change: transform;
+    animation: floatY-slow 8s ease-in-out infinite;
+    transform-origin:center;
+    padding:0 0.03em;
+    box-sizing:border-box;
+    backface-visibility:hidden;
+
+}
+
+/* Gentle stagger so adjacent letters move slightly out of phase */
+.float-letters > *:nth-child(5n+1){ animation-delay: 0s; }
+.float-letters > *:nth-child(5n+2){ animation-delay: 0.18s; }
+.float-letters > *:nth-child(5n+3){ animation-delay: 0.36s; }
+.float-letters > *:nth-child(5n+4){ animation-delay: 0.54s; }
+.float-letters > *:nth-child(5n+5){ animation-delay: 0.72s; }
+
+@keyframes floatY-slow {
+    0%, 100% { transform: translateY(0); }
+    50%     { transform: translateY(-6px); }
+}
+
+/* Usage note: wrap text letters in spans, for example:
+   <h1 class="float-letters"><span>S</span><span>o</span><span>u</span><span>l</span></h1>
+   If you'd like, I can add a small JS snippet to auto-wrap letters for you. */
+
