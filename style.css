@@ -12,7 +12,7 @@ body{
 
 }
 
-/* Letter float animation: responsive, wraps letters to fit viewport */
+
 .float-letters{
     margin: 5px;
     padding: 10px;
@@ -21,7 +21,7 @@ body{
     align-items:center;
     line-height:1;
     gap: 0;
-    font-size: clamp(12px, 8.9vw, 48px); /* scales but keeps letters small on narrow viewports */
+    font-size: clamp(12px, 8.9vw, 48px);
     white-space: normal;
     max-width:100%;
     box-sizing:border-box;
@@ -41,7 +41,6 @@ body{
 
 }
 
-/* Gentle stagger so adjacent letters move slightly out of phase */
 .float-letters > *:nth-child(5n+1){ animation-delay: 0s; }
 .float-letters > *:nth-child(5n+2){ animation-delay: 0.18s; }
 .float-letters > *:nth-child(5n+3){ animation-delay: 0.36s; }
@@ -53,7 +52,4 @@ body{
     50%     { transform: translateY(-6px); }
 }
 
-/* Usage note: wrap text letters in spans, for example:
-   <h1 class="float-letters"><span>S</span><span>o</span><span>u</span><span>l</span></h1>
-   If you'd like, I can add a small JS snippet to auto-wrap letters for you. */
 
