@@ -51,59 +51,112 @@
             </nav>
         </header>
 
-        <div>
-            <div class="vr"></div>
+        <main>
+
+<div class="vr"></div>
+
             <h2>
                 Contact
             </h2>
-            <p>
-                For questions about our games or upcoming releases, please fill out the form below!
-            </p>
-                <div class="form-floating mb-3">
-                    <input type="name" class="form-control" id="floatingName" placeholder="name@example.com" data-bs-theme="dark">
-                    <label for="floatingName">Name</label>
+                <div class="contact-form" data-alert-message="Thanks! Your gameplay question was received — we'll get back to you about releases shortly.">
+                    <p>
+                        For questions about our games or upcoming releases, please fill out the form below!
+                    </p>
+                        <div class="form-floating mb-3">
+                            <input type="name" class="form-control" id="floatingName" placeholder="name@example.com" data-bs-theme="dark">
+                            <label for="floatingName">Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="question" class="form-control" id="floatingQuestion" placeholder="name@example.com" data-bs-theme="dark">
+                            <label for="floatingQuestion">Question</label>
+                        </div>  
+                        <div>
+                            <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                        </div>
                 </div>
-                <div class="form-floating">
-                    <input type="question" class="form-control" id="floatingQuestion" placeholder="name@example.com" data-bs-theme="dark">
-                    <label for="floatingQuestion">Question</label>
+            </div>
+
+<div class="vr"></div>
+
+                <div class="contact-form" data-alert-message="Thanks! Your business inquiry was received — our partnerships team will contact you soon.">
+                    <p>
+                        For buisness inquiries, or questions regarding partnerships with Soul Purpose Games, or individuals in our team, please fill out this form.
+                    </p>
+                        <div class="form-floating mb-3">
+                            <input type="name" class="form-control" id="floatingBuisnessName" placeholder="name@example.com" data-bs-theme="dark">
+                            <label for="floatingBuisnessName">Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="question" class="form-control" id="floating2Question" placeholder="name@example.com" data-bs-theme="dark">
+                            <label for="floating2Question">Question</label>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                        </div>
                 </div>
 
 <div class="vr"></div>
 
-            <p>
-                For buisness inquiries, or questions regarding partnerships with Soul Purpose Games, or individuals in our team, please fill out this form.
-            </p>
-                <div class="form-floating mb-3">
-                    <input type="name" class="form-control" id="floatingBuisnessName" placeholder="name@example.com" data-bs-theme="dark">
-                    <label for="floatingBuisnessName">Name</label>
-                </div>
-                <div class="form-floating">
-                    <input type="question" class="form-control" id="floating2Question" placeholder="name@example.com" data-bs-theme="dark">
-                    <label for="floating2Question">Question</label>
-                </div>
-
-<div class="vr"></div>
-
-            <p>
-                For general questions, feedback, or other inquiries, please use the form below to get in touch with us. We value your input and look forward to hearing from you!
-            </p>
-                <div class="form-floating mb-3">
-                    <input type="name" class="form-control" id="floatingGeneralName" placeholder="name@example.com" data-bs-theme="dark">
-                    <label for="floatingGeneralName">Name</label>
-                </div>
-                <div class="form-floating">
-                    <input type="question" class="form-control" id="floating3Question" placeholder="name@example.com" data-bs-theme="dark">
-                    <label for="floating3Question">Question</label>
+                <div class="contact-form" data-alert-message="Thanks! Your message was received — we appreciate your feedback and will respond when appropriate.">
+                    <p>
+                        For general questions, feedback, or other inquiries, please use the form below to get in touch with us. We value your input and look forward to hearing from you!
+                    </p>
+                        <div class="form-floating mb-3">
+                            <input type="name" class="form-control" id="floatingGeneralName" placeholder="name@example.com" data-bs-theme="dark">
+                            <label for="floatingGeneralName">Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="question" class="form-control" id="floating3Question" placeholder="name@example.com" data-bs-theme="dark">
+                            <label for="floating3Question">Question</label>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                        </div>
                 </div>
 
 <div class="vr"></div>
 
-        </div>
+        </main>
 
         <footer>
             <p>Copyright &COPYSoulPurposeGames 2026</p>
         </footer>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // container for transient alerts
+                var alertsContainer = document.createElement('div');
+                alertsContainer.style.position = 'fixed';
+                alertsContainer.style.top = '1rem';
+                alertsContainer.style.right = '1rem';
+                alertsContainer.style.zIndex = 1080;
+                document.body.appendChild(alertsContainer);
+
+                function showDarkAlert(message) {
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'alert alert-dark alert-dismissible fade show';
+                    wrapper.setAttribute('role', 'alert');
+                    wrapper.style.minWidth = '260px';
+                    wrapper.innerHTML = '<div>' + (message || '') + '</div>' +
+                        '<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>';
+                    alertsContainer.appendChild(wrapper);
+                    // auto remove after 5s
+                    setTimeout(function () { if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper); }, 5000);
+                }
+
+                document.querySelectorAll('.contact-form button[type="submit"]').forEach(function (btn) {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        var container = btn.closest('.contact-form');
+                        if (!container) return;
+                        var msg = container.getAttribute('data-alert-message') || 'Thanks — message received.';
+                        showDarkAlert(msg);
+                        // clear form inputs in this container
+                        container.querySelectorAll('input').forEach(function (input) { input.value = ''; });
+                    });
+                });
+            });
+        </script>
     </body>
 
 </html>
