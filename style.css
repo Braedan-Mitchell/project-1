@@ -1,5 +1,5 @@
 
-body{
+body {
     background-color: rgb(44, 43, 43);
     color: #FFA500;
 
@@ -13,7 +13,7 @@ body{
 }
 
 
-.float-letters{
+.float-letters {
     margin: 5px;
     padding: 10px;
     display:inline-flex;
@@ -50,6 +50,25 @@ body{
 @keyframes floatY-slow {
     0%, 100% { transform: translateY(0); }
     50%     { transform: translateY(-6px); }
+}
+
+/* Ensure Bootstrap floating labels use the same orange when floating */
+.form-floating .form-control:focus ~ label,
+.form-floating .form-control:not(:placeholder-shown) ~ label {
+    color: #FFA500;
+    opacity: 1;
+}
+
+/* Also match when the input itself has the orange color inline */
+.form-floating .form-control {
+    color: #FFA500;
+}
+
+/* Make floating labels the same orange by default (before focus) */
+.form-floating > label {
+    color: #FFA500;
+    opacity: 1;
+    transition: color .15s ease, opacity .15s ease;
 }
 
 
