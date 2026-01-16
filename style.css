@@ -5,6 +5,9 @@ body {
 
 }
 
+.txt-clr-override {
+    color: #FFA500 !important;
+}
 
 .vr {
   border-left: 2px solid rgb(44, 43, 43);
@@ -73,6 +76,8 @@ body {
     border-color: #FFA500;
     color: rgb(44, 43, 43);
     transition: background-color .15s ease, color .15s ease, border .15s ease, box-shadow .15s ease;
+    border-radius: 4px;
+    padding: 0px 3px;
 }
 
 .btn-warning:hover {
