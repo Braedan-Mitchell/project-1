@@ -87,3 +87,11 @@ body {
     cursor: pointer;
 }
 
+.badge-new,
+.navbar .badge-new,
+.nav .badge-new,
+.nav-link .badge {
+    background-color: #FF8C00 !important;
+    color: rgb(44, 43, 43) !important;
+}
+
