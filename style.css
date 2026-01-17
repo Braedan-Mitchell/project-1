@@ -15,6 +15,15 @@ body {
 
 }
 
+.logo {
+    height: 80px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 8px;
+    display:inline-flex;
+    vertical-align: middle;
+}
+
 
 .float-letters {
     margin: 5px;
