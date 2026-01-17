@@ -64,17 +64,17 @@
                     </p>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="contactName" placeholder="Name" data-bs-theme="dark">
+                        <input type="text" class="form-control" id="contactName" placeholder="Name" data-bs-theme="dark" required>
                         <label for="contactName">Name</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Your question" id="contactQuestion" style="height: 120px;" data-bs-theme="dark"></textarea>
+                        <textarea class="form-control" placeholder="Your question" id="contactQuestion" style="height: 120px;" data-bs-theme="dark" required></textarea>
                         <label for="contactQuestion">Question</label>
                     </div>
 
                     <div class="mb-3">
-                        <div class="form-check">
+                        <div class="form-check" required>
                             <input class="form-check-input" type="radio" name="inquiryType" id="inquiryGameplay" value="gameplay" checked
                                 onchange="this.closest('.contact-form').setAttribute('data-alert-message','Thanks! Your gameplay question was received — we\'ll get back to you about releases shortly.');">
                             <label class="form-check-label" for="inquiryGameplay">Gameplay</label>
@@ -92,7 +92,40 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                        <button type="submit" id="contactSubmit" class="btn btn-warning mt-3" disabled>Submit</button>
+                        <small id="contactNote" class="text-muted ms-2" style="opacity:0.75; display:inline-block; vertical-align:middle;">please fill all fields to submit</small>
+                        <script>
+                            (function(){
+                                var form = document.currentScript.parentElement.closest('.contact-form');
+                                if(!form) return;
+                                var nameInput = form.querySelector('#contactName');
+                                var question = form.querySelector('#contactQuestion');
+                                var radios = form.querySelectorAll('input[name="inquiryType"]');
+                                var submitBtn = form.querySelector('#contactSubmit');
+                                var note = form.querySelector('#contactNote');
+                                function isValid(){
+                                    return nameInput && nameInput.value.trim() && question && question.value.trim();
+                                }
+                                function updateState(){
+                                    if(isValid()){
+                                        submitBtn.disabled = false;
+                                        note.style.display = 'none';
+                                    } else {
+                                        submitBtn.disabled = true;
+                                        note.style.display = '';
+                                    }
+                                }
+                                nameInput.addEventListener('input', updateState);
+                                question.addEventListener('input', updateState);
+                                radios.forEach(function(r){ r.addEventListener('change', updateState); });
+                                // After submit (outer handler clears the fields), re-check state and disable if needed.
+                                // Use setTimeout so this runs after other submit handlers.
+                                submitBtn.addEventListener('click', function(){
+                                    setTimeout(updateState, 0);
+                                });
+                                updateState();
+                            })();
+                        </script>
                     </div>
                 </div>
 
