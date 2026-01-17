@@ -24,6 +24,10 @@ body {
     vertical-align: middle;
 }
 
+main {
+    margin: 5%;
+}
+
 
 .float-letters {
     margin: 5px;
